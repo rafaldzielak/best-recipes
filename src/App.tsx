@@ -1,24 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import RecipeListComponent from "./components/recipe-list/RecipeList";
+import RecipeProvider from "./context/RecipeProvider";
+import "./App.scss";
+import Navbar from "./components/navbar/Navbar";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import FavouriteList from "./components/recipe-list/FavouriteList";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <Router>
+        <RecipeProvider>
+          <Navbar />
+          <Switch>
+            <Route path='/fav' component={FavouriteList} />
+            <Route exact path='/' component={RecipeListComponent} />
+          </Switch>
+        </RecipeProvider>
+      </Router>
     </div>
   );
 }
